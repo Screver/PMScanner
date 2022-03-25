@@ -49,8 +49,12 @@ class MainActivity : AppCompatActivity() {
                     var decode = it.text.filterNot{filtered.indexOf(it) > -1}
                     var elements = decode.split(",").toTypedArray()
 
-                    val qrcode = QrCodes(elements[0], elements[1], elements[2], elements[3])
-                    tv_textView.text = qrcode.date + " " + qrcode.name
+                    if (elements.size == 5) {
+                        val qrcode = QrCodes(elements[0], elements[1], elements[2], elements[3])
+                        tv_textView.text = qrcode.date + " " + qrcode.jour + " " + qrcode.number
+                    } else {
+                        tv_textView.text = "CE QR CODE N'EST PAS VALIDE"
+                    }
                 }
             }
 
