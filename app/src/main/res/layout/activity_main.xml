@@ -4,34 +4,48 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+        android:background="#7A1818">
 
-    <com.budiyev.android.codescanner.CodeScannerView
-            android:id="@+id/scanner_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="match_parent">
 
-            app:autoFocusButtonColor="@color/white"
-            app:autoFocusButtonVisible="true"
+        <TextView
+                android:id="@+id/tv_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-            app:flashButtonColor="@color/white"
-            app:flashButtonVisible="true"
+                android:text="@string/scannez_un_billet"
+                android:textColor="#FFC107"
 
-            app:maskColor="#4B000000"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scanner_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            />
+        <com.budiyev.android.codescanner.CodeScannerView
+                android:id="@+id/scanner_view"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
 
-    <TextView
-            android:id="@+id/tv_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                app:autoFocusButtonColor="#FFC107"
+                app:autoFocusButtonVisible="true"
 
-            android:layout_centerHorizontal="true"
-            android:text="Scannez un billet"
-            android:textColor="@color/white"
+                app:flashButtonColor="#FFC107"
+                app:flashButtonVisible="true"
 
-            android:layout_below="@+id/scanner_view" />
+                app:maskColor="#4B000000"
 
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+        </com.budiyev.android.codescanner.CodeScannerView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MaraudeursScanner</string>
+    <string name="app_name">Maraudeurs Scanner</string>
+    <string name="scannez_un_billet">Scannez un billet</string>
 </resources>
