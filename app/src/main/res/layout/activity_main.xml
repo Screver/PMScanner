@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="@string/scannez_un_billet"
-                android:textColor="#FFC107"
+                android:textColor="@color/jaune"
 
                 android:textSize="24sp"
                 android:textAlignment="center"
@@ -61,7 +61,7 @@
                 android:layout_marginEnd="32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/ic_launcher_background" />
+                android:backgroundTint="@color/bordeaux" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,7 +17,7 @@ class ListActivity : AppCompatActivity() {
 
         val db = DatabaseHandler(this)
 
-        list_view.LayoutManager = LinearLayoutManager(this)
+        list_view.layoutManager = LinearLayoutManager(this)
 
         val itemAdapter = ItemAdapter(this, getItemsList())
 
@@ -25,16 +25,15 @@ class ListActivity : AppCompatActivity() {
     }
 
 
-    private fun getItemsList(): ArrayList<String> {
+    private fun getItemsList(): ArrayList<TicketModelClass> {
 //        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
 
-        val list = ArrayList<String>()
-
-        for(i in 1..15){
-            list.add("Item $i")
-        }
-
-        return list
-//        return db.viewTickets()
+//        val list = ArrayList<String>()
+//
+//        for(i in 1..15){
+//            list.add("Item $i")
+//        }
+//        return list
+        return db.viewTickets()
     }
 }

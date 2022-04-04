@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import be.sremy.maraudeursscanner.R
+import be.sremy.maraudeursscanner.TicketModelClass
 import kotlinx.android.synthetic.main.my_row.view.*
 
-class ItemAdapter(val context: Context, val items: ArrayList<String>) :
+class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,20 +26,23 @@ class ItemAdapter(val context: Context, val items: ArrayList<String>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.tvItem.text = item
+        holder.ticket_id.text = item.id.toString()
+        holder.ticketFlag.text = item.flag
+        holder.ticketDay.text = item.day
+
 
         if (position % 2 == 0) {
-            holder.cardViewItem.setBackgroundColor(
+            holder.backgroundColor.setBackgroundColor(
                 ContextCompat.getColor(
                     context,
-                    R.color.lightGray
+                    R.color.transparent
                 )
             )
         } else {
-            holder.cardViewItem.setBackgroundColor(
+            holder.backgroundColor.setBackgroundColor(
                 ContextCompat.getColor(
                     context,
-                    R.color.white
+                    R.color.slightly_transparent
                 )
             )
         }
@@ -49,8 +53,12 @@ class ItemAdapter(val context: Context, val items: ArrayList<String>) :
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvItem = view.ticket_flag_text
-        val cardViewItem = view.ticket_day_text
+
+        val backgroundColor = view.cardview_item
+
+        val ticket_id = view.ticket_id_text
+        val ticketFlag = view.ticket_flag_text
+        val ticketDay = view.ticket_day_text
 
     }
 }
