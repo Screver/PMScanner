@@ -1,6 +1,9 @@
 package be.sremy.maraudeursscanner
 
+import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
+import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -44,4 +47,48 @@ class EmpModelClass(context: Context) :
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")
     }
+
+    fun viewTickets(): ArrayList<TicketModelClass> {
+        val ticketList: ArrayList<TicketModelClass> = ArrayList<TicketModelClass>()
+
+        val selectQuery = "SELECT * FROM $TBL_TICKET"
+
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+
+        try {
+            cursor = db.rawQuery(selectQuery, null)
+        } catch (e: SQLException) {
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+
+        var id: Int
+        var day: String
+        var flag : String
+
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(cursor.getColumnIndex(ID))
+                day = cursor.getString(cursor.getColumnIndex(DAY))
+                flag = cursor.getString(cursor.getColumnIndex(FLAG))
+
+                val ticket =  TicketModelClass(id = id, day = day, flag = flag)
+                ticketList.add(ticket)
+            } while (cursor.moveToNext())
+        }
+        return ticketList
+    }
+
+    fun updateTicket(ticket : TicketModelClass) : Int {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(DAY, ticket.day)
+        contentValues.put(FLAG, ticket.flag)
+
+        val success = db.update(TBL_TICKET, contentValues, ID + "=" + ticket.id, null)
+        db.close()
+        return success
+    }
+
 }

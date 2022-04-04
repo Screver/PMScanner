@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="be.sremy.maraudeursscanner">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
             android:allowBackup="true"
@@ -11,6 +11,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.MaraudeursScanner">
+        <activity
+                android:name=".ListActivity"
+                android:label="Tous les tickets"
+                android:exported="false"
+                android:parentActivityName=".MainActivity"/>
         <activity
                 android:name=".MainActivity"
                 android:exported="true">

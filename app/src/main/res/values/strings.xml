@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Maraudeurs Scanner</string>
     <string name="scannez_un_billet">Scannez un billet</string>
+    <string name="list_button">Affichez la liste des tickets</string>
+
 </resources>
