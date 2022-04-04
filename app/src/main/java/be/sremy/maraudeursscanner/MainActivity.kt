@@ -32,14 +32,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-        var helper = EmpModelClass(applicationContext)
-        var db = helper.readableDatabase
-        var rs = db.rawQuery("SELECT * FROM tickets", null)
-
-        if(rs.moveToNext())
-            Toast.makeText(applicationContext, rs.getString(0), Toast.LENGTH_LONG).show()
-
         tv_textView = findViewById(R.id.tv_textView)
         scanner_view = findViewById(R.id.scanner_view)
 
@@ -131,4 +123,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 }

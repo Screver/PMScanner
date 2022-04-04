@@ -7,7 +7,7 @@ import android.database.SQLException
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class EmpModelClass(context: Context) :
+class DatabaseHandler(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object{
@@ -69,14 +69,15 @@ class EmpModelClass(context: Context) :
 
         if (cursor.moveToFirst()) {
             do {
-                id = cursor.getInt(cursor.getColumnIndex(ID))
-                day = cursor.getString(cursor.getColumnIndex(DAY))
-                flag = cursor.getString(cursor.getColumnIndex(FLAG))
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(ID))
+                day = cursor.getString(cursor.getColumnIndexOrThrow(DAY))
+                flag = cursor.getString(cursor.getColumnIndexOrThrow(FLAG))
 
                 val ticket =  TicketModelClass(id = id, day = day, flag = flag)
                 ticketList.add(ticket)
             } while (cursor.moveToNext())
         }
+
         return ticketList
     }
 
