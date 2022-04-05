@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import be.sremy.maraudeursscanner.Entities.QrCodes
 import com.budiyev.android.codescanner.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.my_row.*
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -26,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         val buttonListActivity = findViewById<FloatingActionButton>(R.id.list_button)
         buttonListActivity.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
@@ -39,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         setupPermission()
         codeScanner()
-
     }
 
     private fun codeScanner() {
@@ -60,9 +58,21 @@ class MainActivity : AppCompatActivity() {
                     var decode = it.text.filterNot{filtered.indexOf(it) > -1}
                     var elements = decode.split(",").toTypedArray()
 
+                    //SI LE QR CODE EST VALIDE
                     if (elements.size == 5) {
-                        val qrcode = QrCodes(elements[0], elements[1], elements[2], elements[3])
-                        tv_textView.text = qrcode.date + " " + qrcode.jour + " " + qrcode.number
+                        val qrcode = QrCodes(elements[0], elements[1], elements[2], elements[3].replace(" ","").toInt())
+
+                        val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
+                        val ticket = databaseHandler.searchSingleTicket(qrcode.number)
+
+                        var newflag = ""
+                        if (ticket.flag == "FALSE") {
+                            newflag = "TRUE"
+                            tv_textView.text = qrcode.date + " " + qrcode.jour + " " + qrcode.number + ticket.flag
+                            databaseHandler.updateTicket(TicketModelClass(ticket.id,"",newflag))
+                        } else{
+                            tv_textView.text = "CE QR CODE A DEJA ETE VALIDE"
+                        }
                     } else {
                         tv_textView.text = "CE QR CODE N'EST PAS VALIDE"
                     }
@@ -74,15 +84,13 @@ class MainActivity : AppCompatActivity() {
                     Log.e("Main", "Problème d'implémentation de la caméra : ${it.message}")
                 }
             }
-
         }
 
-//              A rajouter pour traiter les code un par un en cliquant sur l'écran
-//
+//                  A rajouter pour traiter les code un par un en cliquant sur l'écran
+
 //        scanner_view.setOnClickListener {
 //            codeScanner.startPreview()
 //        }
-
     }
 
     override fun onResume() {
@@ -102,7 +110,6 @@ class MainActivity : AppCompatActivity() {
         if (permission != PackageManager.PERMISSION_GRANTED) {
             makeRequest()
         }
-
     }
 
     private fun makeRequest() {
@@ -110,7 +117,6 @@ class MainActivity : AppCompatActivity() {
             this,
             arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE
         )
-
     }
 
     override fun onRequestPermissionsResult(requestCode : Int, permissions: Array<out String>,grantResults: IntArray) {
@@ -123,8 +129,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
-
-
 }

@@ -49,6 +49,34 @@ class DatabaseHandler(context: Context) :
         TODO("Not yet implemented")
     }
 
+    fun searchSingleTicket(id: Int): TicketModelClass {
+        var ticket = TicketModelClass(id,"","")
+
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+
+        val selectQuery = "SELECT * FROM $TBL_TICKET WHERE $ID = ${ticket.id}"
+
+        var id: Int
+        var day: String
+        var flag : String
+
+        cursor = db.rawQuery(selectQuery, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(ID))
+                day = cursor.getString(cursor.getColumnIndexOrThrow(DAY))
+                flag = cursor.getString(cursor.getColumnIndexOrThrow(FLAG))
+
+            ticket =  TicketModelClass(id = id, day = day, flag = flag)
+            } while (cursor.moveToNext())
+        }
+        cursor.close() // Added by myself, need to check if works
+        return ticket
+
+    }
+
     fun viewTickets(): ArrayList<TicketModelClass> {
         val ticketList: ArrayList<TicketModelClass> = ArrayList<TicketModelClass>()
 
@@ -81,8 +109,6 @@ class DatabaseHandler(context: Context) :
         cursor.close() // Added by myself, need to check if works
         return ticketList
     }
-
-
 
     fun updateTicket(ticket : TicketModelClass) : Int {
         val db = this.writableDatabase

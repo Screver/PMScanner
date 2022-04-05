@@ -20,11 +20,6 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-//        val buttonSwitchActivity = findViewById<FloatingActionButton>(R.id.flag_switch_button)
-//        buttonSwitchActivity.setOnClickListener {
-//            Toast.makeText(this, "buttonSwitchActivity.text", Toast.LENGTH_SHORT)
-//                .show()
-//        }
         setupListOfDataIntoRecyclerView()
     }
 
