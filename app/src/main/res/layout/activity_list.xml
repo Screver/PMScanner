@@ -15,4 +15,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/bordeaux" />
+
+    <TextView
+            android:id="@+id/list_noRecord"
+
+            android:text="@string/list_noRecords"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteY="713dp"
+            tools:layout_editor_absoluteX="207dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

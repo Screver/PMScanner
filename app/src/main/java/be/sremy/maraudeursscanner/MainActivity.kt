@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         val buttonListActivity = findViewById<FloatingActionButton>(R.id.list_button)
         buttonListActivity.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)

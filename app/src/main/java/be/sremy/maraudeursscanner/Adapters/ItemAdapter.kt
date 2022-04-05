@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import be.sremy.maraudeursscanner.ListActivity
 import be.sremy.maraudeursscanner.R
 import be.sremy.maraudeursscanner.TicketModelClass
 import kotlinx.android.synthetic.main.my_row.view.*
@@ -46,6 +47,12 @@ class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) 
                 )
             )
         }
+
+        holder.flagSwitchButton.setOnClickListener{view ->
+            if (context is ListActivity) {
+                context.switchTicketFlag(item)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -59,6 +66,7 @@ class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) 
         val ticket_id = view.ticket_id_text
         val ticketFlag = view.ticket_flag_text
         val ticketDay = view.ticket_day_text
+        val flagSwitchButton = view.flag_switch_button
 
     }
 }

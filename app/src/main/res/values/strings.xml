@@ -2,5 +2,8 @@
     <string name="app_name">Maraudeurs Scanner</string>
     <string name="scannez_un_billet">Scannez un billet</string>
     <string name="list_button">Affichez la liste des tickets</string>
+    <string name="flag_switch_button">Changer l\'état du ticket </string>
+    <string name="list_noRecords">Pas de tickets dans la base de données ...</string>
+
 
 </resources>

@@ -42,7 +42,7 @@
                     android:textStyle="bold"
 
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
 
@@ -60,12 +60,30 @@
                     android:padding="12dp"
 
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="128dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="@+id/ticket_id_text"
                     android:textColor="@color/jaune" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/flag_switch_button"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+
+                    android:contentDescription="@string/flag_switch_button"
+                    android:focusable="true"
+
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_bullet_list"
+                    android:text="Button"
+
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/bordeaux" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

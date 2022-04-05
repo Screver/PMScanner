@@ -15,7 +15,7 @@ class DatabaseHandler(context: Context) :
         private const val DATABASE_NAME = "tickets.db"
         private const val TBL_TICKET = "tickets"
 
-        // table conts
+        // table const
         private const val ID = "_id"
         private const val DAY = "day"
         private const val FLAG = "flag"
@@ -27,15 +27,16 @@ class DatabaseHandler(context: Context) :
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        db?.execSQL("DROP TABLE tickets")
-
         // creating table with fields
+
         // CREATE TABLE tickets(_id INTEGER PRIMARY KEY, day TEXT, number TEXT, flag TEXT)
+//        val createTblTicket = ("CREATE TABLE $TBL_TICKET ($ID INTEGER PRIMARY KEY, $DAY TEXT, $FLAG TEXT)")
+
         val createTblTicket = ("CREATE TABLE " + TBL_TICKET + "(" + ID + " INTEGER PRIMARY KEY," +
                 DAY + " TEXT," +
                 FLAG + " TEXT" + ")")
 
-        val populateTickets = ("INSERT INTO " + TBL_TICKET + "(" +DAY + " ," + FLAG + ") VALUES('" + NEWDAY + "' ," + NEWFLAG + ")")
+        val populateTickets = ("INSERT INTO $TBL_TICKET($DAY ,$FLAG) VALUES('$NEWDAY' ,'$NEWFLAG')")
 
         db?.execSQL(createTblTicket)
 
@@ -77,14 +78,15 @@ class DatabaseHandler(context: Context) :
                 ticketList.add(ticket)
             } while (cursor.moveToNext())
         }
-
+        cursor.close() // Added by myself, need to check if works
         return ticketList
     }
+
+
 
     fun updateTicket(ticket : TicketModelClass) : Int {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(DAY, ticket.day)
         contentValues.put(FLAG, ticket.flag)
 
         val success = db.update(TBL_TICKET, contentValues, ID + "=" + ticket.id, null)
