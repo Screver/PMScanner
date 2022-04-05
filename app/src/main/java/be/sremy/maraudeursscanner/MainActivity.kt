@@ -87,7 +87,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 //                  A rajouter pour traiter les code un par un en cliquant sur l'écran
-
 //        scanner_view.setOnClickListener {
 //            codeScanner.startPreview()
 //        }
@@ -120,6 +119,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode : Int, permissions: Array<out String>,grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode) {
             CAMERA_REQUEST_CODE -> {
                 if(grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
