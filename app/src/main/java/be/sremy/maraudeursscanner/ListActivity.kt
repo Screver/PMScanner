@@ -36,6 +36,7 @@ class ListActivity : AppCompatActivity() {
         databaseHandler.updateTicket(TicketModelClass(ticketModelClass.id,"",newflag))
         setupListOfDataIntoRecyclerView()
 
+
     }
 
     private fun setupListOfDataIntoRecyclerView() {

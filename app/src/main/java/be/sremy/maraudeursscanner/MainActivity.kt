@@ -1,10 +1,12 @@
 package be.sremy.maraudeursscanner
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -13,7 +15,9 @@ import androidx.core.content.ContextCompat
 import be.sremy.maraudeursscanner.Entities.QrCodes
 import com.budiyev.android.codescanner.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_row.*
+import kotlinx.android.synthetic.main.search_dialog.*
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -31,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         buttonListActivity.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
+        }
+
+        val buttonSearchActivity = findViewById<FloatingActionButton>(R.id.search_button)
+        buttonSearchActivity.setOnClickListener {
+            searchDialog()
         }
 
         tv_textView = findViewById(R.id.tv_textView)
@@ -130,4 +139,39 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    fun searchDialog() {
+        val searchDialog = Dialog(this, R.style.Theme_Dialog)
+        searchDialog.setCancelable(false)
+
+        searchDialog.setContentView(R.layout.search_dialog)
+
+        searchDialog.switch_search_button.setOnClickListener(View.OnClickListener{
+            val number = searchDialog.etSearchNumber.text.toString()
+
+            val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+            val ticket = databaseHandler.searchSingleTicket(number.toInt())
+
+
+            if (number.isNotEmpty()) {
+                var newflag = ""
+                if (ticket.flag == "FALSE") {
+                    newflag = "TRUE"
+                    val status = databaseHandler.updateTicket(TicketModelClass(number.toInt(), "", newflag))
+                    if (status > -1) {
+                        searchDialog.dismiss()
+                        Toast.makeText(applicationContext, "Ticket mis à jour", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "Ce ticket est déjà validé...", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(applicationContext, "Vous devez entrer un numéro de ticket...", Toast.LENGTH_SHORT).show()
+            }
+        })
+        searchDialog.cancel_button.setOnClickListener(View.OnClickListener { searchDialog.dismiss() })
+
+        searchDialog.show()
+    }
+
 }

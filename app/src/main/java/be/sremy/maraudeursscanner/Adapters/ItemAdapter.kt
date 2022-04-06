@@ -53,6 +53,7 @@ class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) 
                 context.switchTicketFlag(item)
             }
         }
+
     }
 
     override fun getItemCount(): Int {

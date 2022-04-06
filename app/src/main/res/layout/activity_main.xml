@@ -63,6 +63,26 @@
                 android:layout_marginBottom="32dp"
                 android:backgroundTint="@color/bordeaux" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/search_button"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:contentDescription="@string/search_button"
+                android:focusable="true"
+
+                android:clickable="true"
+                app:srcCompat="@android:drawable/ic_menu_search"
+
+                android:backgroundTint="@color/bordeaux"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/list_button"
+                app:layout_constraintStart_toStartOf="@+id/scanner_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintVertical_bias="0.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
