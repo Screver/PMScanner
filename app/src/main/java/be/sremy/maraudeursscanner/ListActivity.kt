@@ -25,7 +25,6 @@ class ListActivity : AppCompatActivity() {
 
     fun switchTicketFlag(ticketModelClass : TicketModelClass) {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-//        val day = ticketModelClass.day
         var newflag = ""
         newflag = if (ticketModelClass.flag == "FALSE") {
             "TRUE"

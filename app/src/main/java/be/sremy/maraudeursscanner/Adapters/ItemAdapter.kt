@@ -28,9 +28,13 @@ class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) 
         val item = items[position]
 
         holder.ticket_id.text = item.id.toString()
-        holder.ticketFlag.text = item.flag
         holder.ticketDay.text = item.day
-
+        if (item.flag == "FALSE") {
+//            holder.ticketFlag.text = item.flag
+            holder.ticketFlag.setImageResource(R.drawable.ic_ticket_nothere)
+        } else {
+            holder.ticketFlag.setImageResource(R.drawable.ic_ticket_present)
+        }
 
         if (position % 2 == 0) {
             holder.backgroundColor.setBackgroundColor(
@@ -65,7 +69,8 @@ class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) 
         val backgroundColor = view.cardview_item
 
         val ticket_id = view.ticket_id_text
-        val ticketFlag = view.ticket_flag_text
+//        val ticketFlag = view.ticket_flag_text
+        val ticketFlag = view.ticket_flag_image
         val ticketDay = view.ticket_day_text
         val flagSwitchButton = view.flag_switch_button
 

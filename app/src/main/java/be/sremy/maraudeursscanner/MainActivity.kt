@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.text.isDigitsOnly
 import be.sremy.maraudeursscanner.Entities.QrCodes
 import com.budiyev.android.codescanner.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,15 +58,15 @@ class MainActivity : AppCompatActivity() {
             formats = CodeScanner.ALL_FORMATS
 
             autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.CONTINUOUS
+            scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
             isFlashEnabled = false
 
             decodeCallback = DecodeCallback {
                 runOnUiThread {
                     val filtered = "[]\']"
-                    var decode = it.text.filterNot{filtered.indexOf(it) > -1}
-                    var elements = decode.split(",").toTypedArray()
+                    val decode = it.text.filterNot{filtered.indexOf(it) > -1}
+                    val elements = decode.split(",").toTypedArray()
 
                     //SI LE QR CODE EST VALIDE
                     if (elements.size == 5) {
@@ -73,17 +74,19 @@ class MainActivity : AppCompatActivity() {
 
                         val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
                         val ticket = databaseHandler.searchSingleTicket(qrcode.number)
-
+                        if (qrcode.jour != ticket.day) {
+                            tv_textView.text = getText(R.string.unvalid_ticket)
+                        } else {
                         var newflag = ""
                         if (ticket.flag == "FALSE") {
                             newflag = "TRUE"
-                            tv_textView.text = qrcode.date + " " + qrcode.jour + " " + qrcode.number + ticket.flag
+                            tv_textView.text = getText(R.string.valid_ticket)
                             databaseHandler.updateTicket(TicketModelClass(ticket.id,"",newflag))
                         } else{
-                            tv_textView.text = "CE QR CODE A DEJA ETE VALIDE"
+                            tv_textView.text = getText(R.string.already_validated)
                         }
-                    } else {
-                        tv_textView.text = "CE QR CODE N'EST PAS VALIDE"
+                    }} else {
+                        tv_textView.text = getText(R.string.unvalid_ticket)
                     }
                 }
             }
@@ -94,11 +97,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
 //                  A rajouter pour traiter les code un par un en cliquant sur l'écran
-//        scanner_view.setOnClickListener {
-//            codeScanner.startPreview()
-//        }
+        scanner_view.setOnClickListener {
+            codeScanner.startPreview()
+            tv_textView.text = getText(R.string.scannez_un_billet)
+
+        }
     }
 
     override fun onResume() {
@@ -150,10 +154,10 @@ class MainActivity : AppCompatActivity() {
             val number = searchDialog.etSearchNumber.text.toString()
 
             val databaseHandler: DatabaseHandler = DatabaseHandler(this)
-            val ticket = databaseHandler.searchSingleTicket(number.toInt())
 
-
-            if (number.isNotEmpty()) {
+            if (number.isNotEmpty() && number.isDigitsOnly()) {
+                if (number.toInt() in 1..440) {
+                val ticket = databaseHandler.searchSingleTicket(number.toInt())
                 var newflag = ""
                 if (ticket.flag == "FALSE") {
                     newflag = "TRUE"
@@ -161,17 +165,20 @@ class MainActivity : AppCompatActivity() {
                     if (status > -1) {
                         searchDialog.dismiss()
                         Toast.makeText(applicationContext, "Ticket mis à jour", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(applicationContext, "Ce ticket est déjà validé...", Toast.LENGTH_SHORT).show()
+                        searchDialog.dismiss()
+                        tv_textView.text = getText(R.string.valid_ticket)
+                    }} else {
+//                    Toast.makeText(applicationContext, "Ce ticket est déjà validé...", Toast.LENGTH_SHORT).show()
+                        tv_textView.text = getText(R.string.already_validated)
+                    searchDialog.dismiss()
+                }}else {
+                    Toast.makeText(applicationContext, "Votre numéro de ticket n'est pas valide", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(applicationContext, "Vous devez entrer un numéro de ticket...", Toast.LENGTH_SHORT).show()
             }
         })
         searchDialog.cancel_button.setOnClickListener(View.OnClickListener { searchDialog.dismiss() })
-
         searchDialog.show()
     }
-
 }

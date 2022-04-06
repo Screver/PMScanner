@@ -6,10 +6,18 @@
     <string name="search_button">Chercher un ticket spécifique</string>
     <string name="cancel_button">Annuler la recherche</string>
 
+    <string name="already_validated">Ce ticket est déjà validé</string>
+    <string name="valid_ticket">Ticket validé, bienvenue !</string>
+    <string name="unvalid_ticket">Ce ticket n\'est pas valide</string>
+
 
     <string name="list_noRecords">Pas de tickets dans la base de données ...</string>
     <string name="switch_search_button">Valider Ticket</string>
     <string name="et_search_number">Numéro de ticket</string>
+    <string name="ticket_id_text">0</string>
+    <string name="ticket_day_text">Jour</string>
+    <string name="ticket_flag_text">Statut</string>
+    <string name="switch_button">Changer état du ticket</string>
 
 
 </resources>

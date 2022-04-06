@@ -3,29 +3,32 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/bordeaux">
 
     <androidx.cardview.widget.CardView
             android:id="@+id/cardview_item"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="5dp"
-            >
+            app:cardBackgroundColor="@color/bordeaux">
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="12dp">
 
             <TextView
                     android:id="@+id/ticket_id_text"
-                    android:text="1"
+                    android:text="@string/ticket_id_text"
+                    android:layout_weight="0"
+
 
                     android:textSize="40sp"
                     android:textStyle="bold"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="82dp"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
 
@@ -36,13 +39,15 @@
 
             <TextView
                     android:id="@+id/ticket_day_text"
-                    android:text="Samedi"
+                    android:text="@string/ticket_day_text"
+                    android:layout_weight="1"
+
 
                     android:textSize="20sp"
                     android:textStyle="bold"
 
 
-                    android:layout_width="112dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
 
@@ -51,38 +56,30 @@
                     app:layout_constraintTop_toTopOf="@+id/ticket_id_text"
                     android:textColor="@color/jaune" />
 
-            <TextView
-                    android:id="@+id/ticket_flag_text"
-                    android:text="OUI"
+            <ImageView
+                    android:id="@+id/ticket_flag_image"
+                    android:layout_width="104dp"
+                    android:layout_height="86dp"
+                    app:srcCompat="@drawable/ic_ticket_nothere"
 
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:padding="12dp"
-
-
-                    android:layout_width="128dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/ticket_id_text"
-                    android:textColor="@color/jaune" />
+                    android:layout_weight="2" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/flag_switch_button"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
+                    android:layout_weight="3"
 
                     android:contentDescription="@string/flag_switch_button"
                     android:focusable="true"
 
                     android:clickable="true"
                     app:srcCompat="@drawable/ic_bullet_list"
-                    android:text="Button"
+                    android:text="@string/switch_button"
 
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/bordeaux" />
+
+                    android:layout_width="91dp"
+                    android:layout_height="93dp"
+                    android:backgroundTint="@color/bordeaux"
+                    android:padding="12dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
