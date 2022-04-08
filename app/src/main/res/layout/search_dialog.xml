@@ -42,6 +42,9 @@
             android:backgroundTint="@color/bordeaux"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/switch_search_button"
-            app:layout_constraintTop_toBottomOf="@+id/etSearchNumber" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/switch_search_button"
+            app:rippleColor="@color/jaune"
+            app:backgroundTint="@color/jaune" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

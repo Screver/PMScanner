@@ -14,7 +14,7 @@
     <string name="list_noRecords">Pas de tickets dans la base de données ...</string>
     <string name="switch_search_button">Valider Ticket</string>
     <string name="et_search_number">Numéro de ticket</string>
-    <string name="ticket_id_text">0</string>
+    <string name="ticket_id_text">440</string>
     <string name="ticket_day_text">Jour</string>
     <string name="ticket_flag_text">Statut</string>
     <string name="switch_button">Changer état du ticket</string>
