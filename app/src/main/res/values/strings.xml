@@ -18,6 +18,7 @@
     <string name="ticket_day_text">Jour</string>
     <string name="ticket_flag_text">Statut</string>
     <string name="switch_button">Changer état du ticket</string>
+    <string name="ticket_image">Image de ticket présent ou non</string>
 
 
 </resources>
