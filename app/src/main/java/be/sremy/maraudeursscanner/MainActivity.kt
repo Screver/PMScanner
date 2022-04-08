@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -17,7 +16,6 @@ import be.sremy.maraudeursscanner.Entities.QrCodes
 import com.budiyev.android.codescanner.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.my_row.*
 import kotlinx.android.synthetic.main.search_dialog.*
 
 private const val CAMERA_REQUEST_CODE = 101
@@ -32,8 +30,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val buttonListActivity = findViewById<FloatingActionButton>(R.id.list_button)
-        buttonListActivity.setOnClickListener {
+//        val buttonListActivity = findViewById<FloatingActionButton>(R.id.list_button)
+//        buttonListActivity.setOnClickListener {
+//            val intent = Intent(this, ListActivity::class.java)
+//            startActivity(intent)
+//        }
+
+        val numeroListActivity = findViewById<TextView>(R.id.nmbre_places)
+        numeroListActivity.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
             startActivity(intent)
         }
@@ -46,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         tv_textView = findViewById(R.id.tv_textView)
         scanner_view = findViewById(R.id.scanner_view)
 
+        countTickets()
         setupPermission()
         codeScanner()
     }
@@ -81,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                         if (ticket.flag == "FALSE") {
                             newflag = "TRUE"
                             tv_textView.text = getText(R.string.valid_ticket)
+
                             databaseHandler.updateTicket(TicketModelClass(ticket.id,"",newflag))
                         } else{
                             tv_textView.text = getText(R.string.already_validated)
@@ -88,6 +94,7 @@ class MainActivity : AppCompatActivity() {
                     }} else {
                         tv_textView.text = getText(R.string.unvalid_ticket)
                     }
+                    countTickets()
                 }
             }
 
@@ -97,6 +104,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
 //                  A rajouter pour traiter les code un par un en cliquant sur l'écran
         scanner_view.setOnClickListener {
             codeScanner.startPreview()
@@ -167,6 +175,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "Ticket mis à jour", Toast.LENGTH_SHORT).show()
                         searchDialog.dismiss()
                         tv_textView.text = getText(R.string.valid_ticket)
+                        countTickets()
                     }} else {
 //                    Toast.makeText(applicationContext, "Ce ticket est déjà validé...", Toast.LENGTH_SHORT).show()
                         tv_textView.text = getText(R.string.already_validated)
@@ -179,6 +188,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
         searchDialog.cancel_button.setOnClickListener(View.OnClickListener { searchDialog.dismiss() })
+        countTickets()
         searchDialog.show()
+    }
+
+    fun countTickets(){
+        val databaseHandler: DatabaseHandler = DatabaseHandler(this)
+        nmbre_places.text = databaseHandler.countPresentTicket().toString()
     }
 }

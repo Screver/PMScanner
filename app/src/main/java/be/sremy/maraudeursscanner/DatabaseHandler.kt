@@ -120,4 +120,21 @@ class DatabaseHandler(context: Context) :
         return success
     }
 
+    fun countPresentTicket(): Int {
+        var nmbre_tickets = 0
+
+        val selectQuery = "SELECT DISTINCT * FROM $TBL_TICKET WHERE $FLAG = 'TRUE'"
+
+        val db = this.readableDatabase
+        var cursor: Cursor? = null
+
+        cursor = db.rawQuery(selectQuery, null)
+
+        nmbre_tickets = cursor.count
+
+        cursor.close()
+
+        return nmbre_tickets
+    }
+
 }
