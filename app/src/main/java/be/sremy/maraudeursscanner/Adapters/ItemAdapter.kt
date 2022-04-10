@@ -16,11 +16,7 @@ class ItemAdapter(val context: Context, val items: ArrayList<TicketModelClass>) 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(
-                R.layout.my_row,
-                parent,
-                false
-            )
+            LayoutInflater.from(context).inflate( R.layout.my_row, parent,false)
         )
     }
 

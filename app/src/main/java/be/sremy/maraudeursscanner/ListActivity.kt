@@ -32,8 +32,15 @@ class ListActivity : AppCompatActivity() {
             "FALSE"
         }
 
+        list_view.layoutManager = LinearLayoutManager(this)
+        val position = LinearLayoutManager(this).findFirstCompletelyVisibleItemPosition()
         databaseHandler.updateTicket(TicketModelClass(ticketModelClass.id,"",newflag))
-        setupListOfDataIntoRecyclerView()
+
+        val itemAdapter = ItemAdapter(this,getItemsList())
+        list_view.adapter = itemAdapter
+        list_view.scrollToPosition(position)
+
+//        setupListOfDataIntoRecyclerView()
 
 
     }
