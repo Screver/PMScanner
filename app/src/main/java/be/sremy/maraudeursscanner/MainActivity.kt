@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val buttonListActivity = findViewById<FloatingActionButton>(R.id.list_button)
-//        buttonListActivity.setOnClickListener {
-//            val intent = Intent(this, ListActivity::class.java)
-//            startActivity(intent)
-//        }
-
         val numeroListActivity = findViewById<TextView>(R.id.nmbre_places)
         numeroListActivity.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
@@ -77,6 +71,12 @@ class MainActivity : AppCompatActivity() {
                     if (elements.size == 5) {
                         val qrcode = QrCodes(elements[0], elements[1], elements[2], elements[3].replace(" ","").toInt())
 
+                        if (qrcode.number in 43..46) {
+                            Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46 n'existent pas... Cfr Evelyne", Toast.LENGTH_LONG).show()
+                            tv_textView.text = getText(R.string.fraud_ticket)
+
+                        } else {
+
                         val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
                         val ticket = databaseHandler.searchSingleTicket(qrcode.number)
                         if (qrcode.jour != ticket.day) {
@@ -91,7 +91,9 @@ class MainActivity : AppCompatActivity() {
                         } else{
                             tv_textView.text = getText(R.string.already_validated)
                         }
-                    }} else {
+                        }
+                        }
+                    } else {
                         tv_textView.text = getText(R.string.unvalid_ticket)
                     }
                     countTickets()
@@ -173,7 +175,6 @@ class MainActivity : AppCompatActivity() {
                     if (status > -1) {
                         searchDialog.dismiss()
                         Toast.makeText(applicationContext, "Ticket mis à jour", Toast.LENGTH_SHORT).show()
-                        searchDialog.dismiss()
                         tv_textView.text = getText(R.string.valid_ticket)
                         countTickets()
                     }} else {

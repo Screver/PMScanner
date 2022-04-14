@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
             android:id="@+id/cardview_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="120dp"
             app:cardCornerRadius="5dp"
             app:cardBackgroundColor="@color/bordeaux">
 
@@ -29,14 +29,13 @@
                     android:textAlignment="center"
                     android:gravity="center"
 
-                    android:layout_width="57dp"
-                    android:layout_height="63dp"
+                    android:layout_width="62dp"
+                    android:layout_height="68dp"
 
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ticket_day_text" />
+                    android:layout_marginStart="16dp" />
 
             <TextView
                     android:id="@+id/ticket_day_text"
@@ -48,29 +47,30 @@
                     android:textStyle="bold"
 
 
-                    android:layout_width="86dp"
-                    android:layout_height="48dp"
+                    android:layout_width="98dp"
+                    android:layout_height="56dp"
                     android:padding="12dp"
 
-                    app:layout_constraintEnd_toStartOf="@+id/ticket_flag_image"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/jaune"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintVertical_bias="0.571" />
+                    app:layout_constraintTop_toTopOf="@+id/ticket_id_text"
+                    app:layout_constraintBottom_toBottomOf="@+id/ticket_id_text"
+                    app:layout_constraintStart_toEndOf="@+id/ticket_id_text"
+                    app:layout_constraintEnd_toStartOf="@+id/ticket_flag_image" />
 
             <ImageView
                     android:id="@+id/ticket_flag_image"
-                    android:layout_width="124dp"
-                    android:layout_height="99dp"
+                    android:layout_width="102dp"
+                    android:layout_height="90dp"
                     app:srcCompat="@drawable/ic_ticket_nothere"
 
                     android:layout_weight="2"
-                    app:layout_constraintEnd_toStartOf="@+id/flag_switch_button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
                     tools:ignore="ImageContrastCheck"
-                    android:contentDescription="@string/ticket_image" />
+                    android:contentDescription="@string/ticket_image"
+                    app:layout_constraintTop_toTopOf="@+id/ticket_day_text"
+                    app:layout_constraintBottom_toBottomOf="@+id/ticket_day_text"
+                    app:layout_constraintEnd_toStartOf="@+id/flag_switch_button"
+                    android:layout_marginEnd="12dp"
+                    app:layout_constraintVertical_bias="0.523" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/flag_switch_button"
@@ -89,13 +89,14 @@
                     android:layout_height="63dp"
                     android:backgroundTint="@color/bordeaux"
                     android:padding="12dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"
                     app:rippleColor="@color/jaune"
                     android:tint="@color/jaune"
-                    app:backgroundTint="@color/jaune" />
+                    app:backgroundTint="@color/jaune"
+                    app:layout_constraintBottom_toBottomOf="@+id/ticket_flag_image"
+                    app:layout_constraintTop_toTopOf="@+id/ticket_flag_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="28dp"
+                    app:layout_constraintVertical_bias="0.481" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

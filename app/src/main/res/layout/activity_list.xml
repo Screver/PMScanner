@@ -24,4 +24,26 @@
             android:layout_height="match_parent"
             tools:layout_editor_absoluteY="713dp"
             tools:layout_editor_absoluteX="207dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/search_ticket"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:contentDescription="@string/search_button"
+            android:focusable="true"
+
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_menu_search"
+
+            android:backgroundTint="@color/bordeaux"
+            app:rippleColor="@color/jaune"
+            app:backgroundTint="@color/jaune"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp"
+             />
 </androidx.constraintlayout.widget.ConstraintLayout>
