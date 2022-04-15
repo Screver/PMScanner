@@ -91,6 +91,7 @@ class ListActivity : AppCompatActivity() {
 
             if (number.isNotEmpty() && number.isDigitsOnly()) {
                 var ticketNum  = number.toInt()
+//                val ticketNum  = number.toInt()
                 if (ticketNum in 1..440) {
                     if (ticketNum in 43..46) {
                         ticketNum = 42

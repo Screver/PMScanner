@@ -21,7 +21,10 @@ class DatabaseHandler(context: Context) :
         private const val FLAG = "flag"
 
         // populate const
+
         private const val NEWDAY = "Samedi"
+//        private const val NEWDAY = "Dimanche"
+
         private const val NEWFLAG = "FALSE"
     }
 
@@ -43,6 +46,12 @@ class DatabaseHandler(context: Context) :
         for (i in 1..440) {
             db?.execSQL(populateTickets)
         }
+        for (i in 43..46) {
+            db?.execSQL(deleteFraud(i))
+        }
+    }
+    fun deleteFraud (toDeleteId : Int): String {
+        return "DELETE FROM $TBL_TICKET WHERE $ID is $toDeleteId"
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

@@ -35,7 +35,6 @@ class ItemAdapter(private val context: Context, private val items: ArrayList<Tic
             if (context is ListActivity) {
                  val pos = holder.adapterPosition
                 context.switchTicketFlag(item, pos)
-                Toast.makeText(context, pos.toString(), Toast.LENGTH_SHORT ).show()
             }
         }
 

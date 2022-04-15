@@ -167,21 +167,38 @@ class MainActivity : AppCompatActivity() {
 
             if (number.isNotEmpty() && number.isDigitsOnly()) {
                 if (number.toInt() in 1..440) {
-                val ticket = databaseHandler.searchSingleTicket(number.toInt())
-                var newflag = ""
-                if (ticket.flag == "FALSE") {
-                    newflag = "TRUE"
-                    val status = databaseHandler.updateTicket(TicketModelClass(number.toInt(), "", newflag))
-                    if (status > -1) {
+                    if (number.toInt() in 43..46) {
+                        tv_textView.text = getText(R.string.fraud_ticket)
+                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46 n'existent pas... Voir Evelyne", Toast.LENGTH_LONG).show()
                         searchDialog.dismiss()
-                        Toast.makeText(applicationContext, "Ticket mis à jour", Toast.LENGTH_SHORT).show()
-                        tv_textView.text = getText(R.string.valid_ticket)
-                        countTickets()
-                    }} else {
-//                    Toast.makeText(applicationContext, "Ce ticket est déjà validé...", Toast.LENGTH_SHORT).show()
-                        tv_textView.text = getText(R.string.already_validated)
-                    searchDialog.dismiss()
-                }}else {
+                    } else {
+                        val ticket = databaseHandler.searchSingleTicket(number.toInt())
+                        var newflag = ""
+                        if (ticket.flag == "FALSE") {
+                            newflag = "TRUE"
+                            val status = databaseHandler.updateTicket(
+                                TicketModelClass(
+                                    number.toInt(),
+                                    "",
+                                    newflag
+                                )
+                            )
+                            if (status > -1) {
+                                searchDialog.dismiss()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Ticket mis à jour",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                tv_textView.text = getText(R.string.valid_ticket)
+                                countTickets()
+                            }
+                        } else {
+                            tv_textView.text = getText(R.string.already_validated)
+                            searchDialog.dismiss()
+                        }
+                    }
+                }else {
                     Toast.makeText(applicationContext, "Votre numéro de ticket n'est pas valide", Toast.LENGTH_SHORT).show()
                 }
             } else {

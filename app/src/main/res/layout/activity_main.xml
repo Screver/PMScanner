@@ -13,20 +13,21 @@
 
         <TextView
                 android:id="@+id/tv_textView"
-                android:layout_width="327dp"
-                android:layout_height="67dp"
+                android:layout_width="324dp"
+                android:layout_height="127dp"
 
                 android:text="@string/scannez_un_billet"
                 android:textColor="@color/jaune"
 
-                android:gravity="center"
-                android:textSize="34sp"
+                android:gravity="top|center"
+                android:textSize="24sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scanner_view"
-                android:layout_marginTop="28dp" />
+                android:layout_marginTop="40dp"
+                app:layout_constraintHorizontal_bias="0.494" />
 
         <com.budiyev.android.codescanner.CodeScannerView
                 android:id="@+id/scanner_view"
@@ -72,8 +73,8 @@
         <TextView
                 android:id="@+id/nmbre_places"
                 android:text="440"
-                android:layout_width="77dp"
-                android:layout_height="48dp"
+                android:layout_width="89dp"
+                android:layout_height="58dp"
                 android:background="@drawable/border"
 
                 android:clickable="true"
@@ -82,16 +83,15 @@
 
 
                 android:textColor="@color/jaune"
-                android:textSize="34sp"
+                android:textSize="24sp"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/scanner_view"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintTop_toBottomOf="@+id/tv_textView"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.179" />
+                app:layout_constraintVertical_bias="0.235" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
