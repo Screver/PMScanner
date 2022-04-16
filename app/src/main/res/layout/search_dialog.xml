@@ -25,10 +25,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+
             app:layout_constraintTop_toBottomOf="@+id/etSearchNumber"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/etSearchNumber"
-            app:layout_constraintStart_toStartOf="@+id/etSearchNumber" />
+            app:layout_constraintStart_toStartOf="@+id/etSearchNumber"
+            style="@style/Button.Custom" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

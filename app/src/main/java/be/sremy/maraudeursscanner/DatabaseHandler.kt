@@ -22,18 +22,14 @@ class DatabaseHandler(context: Context) :
 
         // populate const
 
-        private const val NEWDAY = "Samedi"
-//        private const val NEWDAY = "Dimanche"
+        //TODO Selon le jour de réprésentation
+//        private const val NEWDAY = "Samedi"
+        private const val NEWDAY = "Dimanche"
 
         private const val NEWFLAG = "FALSE"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-
-        // creating table with fields
-
-        // CREATE TABLE tickets(_id INTEGER PRIMARY KEY, day TEXT, number TEXT, flag TEXT)
-//        val createTblTicket = ("CREATE TABLE $TBL_TICKET ($ID INTEGER PRIMARY KEY, $DAY TEXT, $FLAG TEXT)")
 
         val createTblTicket = ("CREATE TABLE " + TBL_TICKET + "(" + ID + " INTEGER PRIMARY KEY," +
                 DAY + " TEXT," +
@@ -46,13 +42,22 @@ class DatabaseHandler(context: Context) :
         for (i in 1..440) {
             db?.execSQL(populateTickets)
         }
-        for (i in 43..46) {
-            db?.execSQL(deleteFraud(i))
-        }
+
+////        //TODO Selon les places à exclure
+//        for (i in 43..46) {
+//            db?.execSQL(deleteFraud(i))
+//        }
+//        for (i in 109..110) {
+//            db?.execSQL(deleteFraud(i))
+//        }
+//        for (i in 79..81)
+//            db?.execSQL(deleteFraud(i))
     }
-    fun deleteFraud (toDeleteId : Int): String {
-        return "DELETE FROM $TBL_TICKET WHERE $ID is $toDeleteId"
-    }
+
+////    //TODO Selon les places à exclure
+//    fun deleteFraud (toDeleteId : Int): String {
+//        return "DELETE FROM $TBL_TICKET WHERE $ID is $toDeleteId"
+//    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         TODO("Not yet implemented")

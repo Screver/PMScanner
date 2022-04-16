@@ -40,8 +40,6 @@ class ListActivity : AppCompatActivity() {
 
         list_view.layoutManager = LinearLayoutManager(this)
 
-//        val position = LinearLayoutManager(this).findLastVisibleItemPosition()
-//        Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT ).show()
 
         databaseHandler.updateTicket(TicketModelClass(ticketModelClass.id,"",newflag))
 
@@ -49,11 +47,6 @@ class ListActivity : AppCompatActivity() {
 
         list_view.adapter = itemAdapter
         list_view.scrollToPosition(pos-1)
-
-
-
-//        setupListOfDataIntoRecyclerView()
-
 
     }
 
@@ -93,18 +86,36 @@ class ListActivity : AppCompatActivity() {
                 var ticketNum  = number.toInt()
 //                val ticketNum  = number.toInt()
                 if (ticketNum in 1..440) {
-                    if (ticketNum in 43..46) {
-                        ticketNum = 42
-                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46 n'existent pas... Voir Evelyne", Toast.LENGTH_LONG).show()
-                    } else if (ticketNum >= 43) {
-                        ticketNum -= 4
-                    }
+
+////                    //TODO Selon les places à exclure
+//                    if (number.toInt() in 43..46) {
+//                        ticketNum = 42
+//                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46, 109 et 110 n'existent pas... Voir billetterie", Toast.LENGTH_LONG).show()
+//                    } else if (number.toInt() >= 43) {
+//                        ticketNum -= 4
+//                    }
+//                    if (number.toInt() in 79..81) {
+//                        ticketNum = 74
+//                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46, 109 et 110 n'existent pas... Voir billetterie", Toast.LENGTH_LONG).show()
+//
+//                    } else if (number.toInt() >= 79) {
+//                        ticketNum -= 3
+//                    }
+//                    if (number.toInt() in 109..110) {
+//                        ticketNum = 100
+//                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46, 109 et 110 n'existent pas... Voir billetterie", Toast.LENGTH_LONG).show()
+//
+//                    } else if (number.toInt() >= 109) {
+//                        ticketNum -= 2
+//                    }
+
+
                     list_view.layoutManager = LinearLayoutManager(this)
                     val itemAdapter = ItemAdapter(this,getItemsList())
-
                     list_view.adapter = itemAdapter
                     list_view.scrollToPosition(ticketNum-1)
                     searchDialog.dismiss()
+
                     }else {
                     Toast.makeText(applicationContext, "Votre numéro de ticket n'est pas valide", Toast.LENGTH_SHORT).show()
                 }

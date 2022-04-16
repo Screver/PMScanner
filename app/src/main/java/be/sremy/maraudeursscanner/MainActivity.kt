@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide();
+
         setContentView(R.layout.activity_main)
 
         val numeroListActivity = findViewById<TextView>(R.id.nmbre_places)
@@ -71,11 +73,12 @@ class MainActivity : AppCompatActivity() {
                     if (elements.size == 5) {
                         val qrcode = QrCodes(elements[0], elements[1], elements[2], elements[3].replace(" ","").toInt())
 
-                        if (qrcode.number in 43..46) {
-                            Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46 n'existent pas... Cfr Evelyne", Toast.LENGTH_LONG).show()
-                            tv_textView.text = getText(R.string.fraud_ticket)
-
-                        } else {
+//                        //TODO Selon les places à exclure
+//                        if (qrcode.number in 43..46 || qrcode.number in 79..81 || qrcode.number in 109..110) {
+//                            Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46, 109 et 110 n'existent pas... Cfr billetterie", Toast.LENGTH_LONG).show()
+//                            tv_textView.text = getText(R.string.fraud_ticket)
+//
+//                        } else {
 
                         val databaseHandler: DatabaseHandler = DatabaseHandler(applicationContext)
                         val ticket = databaseHandler.searchSingleTicket(qrcode.number)
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                             tv_textView.text = getText(R.string.already_validated)
                         }
                         }
-                        }
+//                        } //TODO Selon les places à exclure
                     } else {
                         tv_textView.text = getText(R.string.unvalid_ticket)
                     }
@@ -167,11 +170,11 @@ class MainActivity : AppCompatActivity() {
 
             if (number.isNotEmpty() && number.isDigitsOnly()) {
                 if (number.toInt() in 1..440) {
-                    if (number.toInt() in 43..46) {
-                        tv_textView.text = getText(R.string.fraud_ticket)
-                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46 n'existent pas... Voir Evelyne", Toast.LENGTH_LONG).show()
-                        searchDialog.dismiss()
-                    } else {
+//                    if (number.toInt() in 43..46 || number.toInt() in 79..81 || number.toInt() in 109..110) { //TODO Selon les places à exclure
+//                        tv_textView.text = getText(R.string.fraud_ticket)
+//                        Toast.makeText(applicationContext, "Les tickets 43, 44, 45, 46, 79,80,81, 109 et 110 n'existent pas... Voir billetterie", Toast.LENGTH_LONG).show()
+//                        searchDialog.dismiss()
+//                    } else {
                         val ticket = databaseHandler.searchSingleTicket(number.toInt())
                         var newflag = ""
                         if (ticket.flag == "FALSE") {
@@ -197,7 +200,7 @@ class MainActivity : AppCompatActivity() {
                             tv_textView.text = getText(R.string.already_validated)
                             searchDialog.dismiss()
                         }
-                    }
+//                    } //TODO Selon les places à exclure
                 }else {
                     Toast.makeText(applicationContext, "Votre numéro de ticket n'est pas valide", Toast.LENGTH_SHORT).show()
                 }
@@ -214,4 +217,5 @@ class MainActivity : AppCompatActivity() {
         val databaseHandler: DatabaseHandler = DatabaseHandler(this)
         nmbre_places.text = databaseHandler.countPresentTicket().toString()
     }
+
 }
